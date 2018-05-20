@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.s2u2m.nu</groupId>
+    <artifactId>nu-all</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.10.RELEASE</version>
+    </parent>
+
+    <modules>
+        <module>nu-core</module>
+        <module>nu-account</module>
+    </modules>
+
+    <properties>
+        <!--project config-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <!--mysql config-->
+        <mysql.jdbc>com.mysql.cj.jdbc.Driver</mysql.jdbc>
+        <mysql.user>s2u2m</mysql.user>
+        <mysql.pwd>s2u2m123</mysql.pwd>
+        <mysql.version>6.0.6</mysql.version>
+
+        <!--mybatis related config-->
+        <mybatis.mapper.version>3.5.2</mybatis.mapper.version>
+    </properties>
+
+    <!--basic and common dependencies-->
+    <dependencies>
+
+        <!--helpful plugin-->
+
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- doc related-->
+
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <!--generate static doc-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-staticdocs</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <!--offline doc-->
+        <!-- https://mvnrepository.com/artifact/org.springframework.restdocs/spring-restdocs-mockmvc -->
+        <dependency>
+            <groupId>org.springframework.restdocs</groupId>
+            <artifactId>spring-restdocs-mockmvc</artifactId>
+            <version>1.1.2.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- spring core modules-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!--<version>2.0.0.RELEASE</version>-->
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <!-- storage related -->
+
+        <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <!--<dependency>-->
+            <!--<groupId>mysql</groupId>-->
+            <!--<artifactId>mysql-connector-java</artifactId>-->
+            <!--<version>${mysql.version}</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.alibaba</groupId>-->
+            <!--<artifactId>druid</artifactId>-->
+            <!--<version>1.1.8</version>-->
+        <!--</dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring -->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.shiro</groupId>-->
+            <!--<artifactId>shiro-spring</artifactId>-->
+            <!--<version>1.4.0</version>-->
+        <!--</dependency>-->
+
+        <!--test related dependencies-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.h2database</groupId>-->
+            <!--<artifactId>h2</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-redis</artifactId>-->
+            <!--<version>1.4.7.RELEASE</version>-->
+        <!--</dependency>-->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

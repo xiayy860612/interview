@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>nu-all</artifactId>
+        <groupId>com.s2u2m.nu</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>nu-account</artifactId>
+
+    <properties>
+        <project_doc_root>${project.basedir}/../../doc</project_doc_root>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.s2u2m.nu</groupId>
+            <artifactId>nu-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- storage -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.flywaydb.flyway-test-extensions</groupId>-->
+            <!--<artifactId>flyway-spring-test</artifactId>-->
+            <!--<version>4.1.0</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--make jar executable-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+
+            <!--<plugin>-->
+                <!--<groupId>org.flywaydb</groupId>-->
+                <!--<artifactId>flyway-maven-plugin</artifactId>-->
+                <!--<version>5.0.7</version>-->
+                <!--&lt;!&ndash;below config only used in dev env&ndash;&gt;-->
+                <!--<configuration>-->
+                    <!--<configFile>${pom.basedir}/deploy/flyway/dev.conf</configFile>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.3</version>
+
+                <configuration>
+                    <sourceDirectory>${project_doc_root}/asciidoc</sourceDirectory>
+                    <sourceDocumentName>apis_index.adoc</sourceDocumentName>
+                    <attributes>
+                        <doctype>book</doctype>
+                        <toc>left</toc>
+                        <toclevels>3</toclevels>
+                        <numbered></numbered>
+                        <hardbreaks></hardbreaks>
+                        <sectlinks></sectlinks>
+                        <sectanchors></sectanchors>
+                        <generated>${project.build.directory}/asciidoc</generated>
+                    </attributes>
+                </configuration>
+                
+                <executions>
+                    <execution>
+                        <id>output-html</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>html5</backend>
+                            <outputDirectory>${project_doc_root}/html/${project.name}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
