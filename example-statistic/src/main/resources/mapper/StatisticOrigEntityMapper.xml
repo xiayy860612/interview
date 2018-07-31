@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.s2u2m.example.statistic.dao.StatisticOrigMapper">
+    <resultMap id="StatisticEntityMap" type="StatisticOrigEntity">
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="cnt" jdbcType="BIGINT" property="cnt"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+
+    <sql id="all_fields">
+        name, cnt, create_time
+    </sql>
+
+    <insert id="add" parameterType="StatisticOrigEntity">
+        insert into orig_data (
+        <include refid="all_fields"/>
+        ) values (
+            #{name}, #{cnt}, current_timestamp
+        )
+    </insert>
+
+</mapper>

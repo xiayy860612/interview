@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.s2u2m.example.statistic.dao.StatisticSumMapper">
+    <resultMap id="StatisticSumRcdEntityMap" type="StatisticSumRcdEntity">
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="amount" jdbcType="BIGINT" property="amount"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="StatisticSumEntityMap" type="StatisticSumEntity">
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="amount" jdbcType="BIGINT" property="amount"/>
+    </resultMap>
+
+    <insert id="collectLastMinRcds">
+        merge into sum_per_min
+        key (create_time, name)
+        select dateadd('minute', -1, concat(left(CURRENT_TIMESTAMP(), 17), '00')) as create_time,
+        name, sum(cnt) as amount, current_timestamp as update_time
+        from ORIG_DATA
+        where create_time between dateadd('minute', -1, concat(left(CURRENT_TIMESTAMP(), 17), '00'))
+        and dateadd('second', -1, concat(left(CURRENT_TIMESTAMP(), 17), '00'))
+        group by name
+    </insert>
+
+    <select id="statistic" resultMap="StatisticSumEntityMap">
+        select name, sum(amount) as amount
+        from SUM_PER_MIN
+        where create_time between dateadd('minute', -#{lastMins}, CURRENT_TIMESTAMP())
+        and CURRENT_TIMESTAMP()
+        group by name
+    </select>
+
+</mapper>
